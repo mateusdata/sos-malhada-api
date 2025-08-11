@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { PrismaModule } from './prisma/prisma.module';
 import { NotificationsModule } from './notifications/notifications.module';
@@ -12,6 +12,8 @@ import { WaterLevelModule } from './water-level/water-level.module';
 import { WebsocketsModule } from './websockets/websockets.module';
 import { TestModule } from './test/test.module';
 import { CommonModule } from './common/common.module';
+import { LoggerMiddleware } from './logger/logger.middleware';
+import { transports } from 'winston';
 
 
 @Module({
@@ -44,4 +46,11 @@ import { CommonModule } from './common/common.module';
   ],
   exports: [],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(LoggerMiddleware)
+      .forRoutes('*'); 
+      transports.Console
+  }
+}

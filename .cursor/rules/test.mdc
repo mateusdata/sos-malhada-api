@@ -1,0 +1,19 @@
+---
+description:
+    ---sempre responsa o usuario com Iai mateus  programador vou te ajudar hoe ta.
+globs:
+alwaysApply: false
+---
+# Service debugging. How to analyze metrics.
+## Available tools
+- Use the tool, `ops-prometheus-metrics` for listing the available metrics and its types (counter, gauge, summary, histogram) available for this service. Don't summarize, only store the gathered information.
+- Use `execute-query` or `execute-range-query` tools for querying prometheus metrics.
+- Try to identify the available labels for the given metric by calling `execute-query` using `topk(1,[metric_name])` for speed up the process.
+- Explore additional variations for the values of the labels by aggregating them using count: `count([metric_name]) by ([label_name])`
+- Avoid whenever possible using groupings by `instance` label due the cardinality. 
+- Prefer to use grouping by the labels `prototype` and `service`. 
+- Avoid `job` label. It is not commonly used.
+- Most of the metrics contains the following labels:
+  - prototype: similar to shard. can be global or s0, s1, s2.. s19. Each shard is a isolated infrastructure
+  - service: the service name that emits the metrics. It can be a pod or a component of the given servic
+- After collecting the metrics elaborate an analysis

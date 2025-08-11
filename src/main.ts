@@ -6,7 +6,10 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
-    logger: new ConsoleLogger('API-OrcaData'),
+    logger: new ConsoleLogger({
+      prefix: 'floods-api',
+      sorted: true,
+    }),
   });
 
   app.useGlobalPipes(

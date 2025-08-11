@@ -1,0 +1,17 @@
+---
+description: Como debugar serviço. Regra para usar a ferramenta context_prometheus para passar contexto com informações das métricas e seus formatos.
+alwaysApply: true
+---
+# Debug de serviço com contexto Prometheus
+## Ferramentas disponíveis
+- Use a *tool* `context_prometheus` para carregar o contexto contendo informações das métricas disponíveis para o serviço, incluindo seus formatos (counter, gauge, summary, histogram) e regras de negócio.
+- Use as ferramentas `execute-query` ou `execute-range-query` para consultar as métricas no Prometheus conforme necessário.
+- Tente identificar os labels disponíveis para cada métrica usando `topk(1, [nome_da_métrica])` para acelerar o processo.
+- Explore os valores dos labels agregando com `count([nome_da_métrica]) by ([nome_do_label])`.
+- Evite usar agrupamentos pelo label `instance` para reduzir cardinalidade.
+- Prefira agrupar pelos labels `prototype` e `service`.
+- Evite o label `job`, pois não é muito utilizado.
+- A maioria das métricas inclui os seguintes labels:
+  - **prototype**: semelhante a shard, pode ser global ou s0, s1, s2... s19, onde cada shard representa uma infraestrutura isolada.
+  - **service**: nome do serviço que emite as métricas, podendo ser um pod ou componente do serviço.
+- Após coletar as métricas, elabore uma análise baseada no contexto passado pela *tool* `context_prometheus`.
