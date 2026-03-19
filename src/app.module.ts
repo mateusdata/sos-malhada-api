@@ -10,7 +10,6 @@ import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
 import { WaterLevelModule } from './water-level/water-level.module';
 import { WebsocketsModule } from './websockets/websockets.module';
-import { TestModule } from './test/test.module';
 import { CommonModule } from './common/common.module';
 import { LoggerMiddleware } from './logger/logger.middleware';
 import { transports } from 'winston';
@@ -33,7 +32,6 @@ import { transports } from 'winston';
     EducationalsModule,
     WaterLevelModule,
     WebsocketsModule,
-    TestModule,
     CommonModule
   ],
   controllers: [AppController],

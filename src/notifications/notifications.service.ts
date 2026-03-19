@@ -9,7 +9,7 @@ export class NotificationsService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly waterLevelService: WaterLevelService
-  ) {}
+  ) { }
 
   async create(createNotificationDto: CreateNotificationDto) {
     const level = createNotificationDto.level;
@@ -53,9 +53,10 @@ export class NotificationsService {
         sound: "default",
         title: title,
         body: body,
+        priority: "high", 
         data: {
           level: levelInMeters.toFixed(2),
-          nav: "\(tabs)/home",
+          nav: "(tabs)/home",
         },
       };
 
