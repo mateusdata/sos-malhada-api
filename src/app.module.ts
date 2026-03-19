@@ -13,6 +13,7 @@ import { WebsocketsModule } from './websockets/websockets.module';
 import { CommonModule } from './common/common.module';
 import { LoggerMiddleware } from './logger/logger.middleware';
 import { transports } from 'winston';
+import { TestModule } from './modules/test/test.module';
 
 
 @Module({
@@ -32,7 +33,8 @@ import { transports } from 'winston';
     EducationalsModule,
     WaterLevelModule,
     WebsocketsModule,
-    CommonModule
+    CommonModule,
+    TestModule
   ],
   controllers: [AppController],
   providers: [
