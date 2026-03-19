@@ -46,7 +46,6 @@
     "ioredis": "^5.5.0",
     "pino": "^9.8.0",
     "pino-loki": "^2.6.0",
-    "prisma-erd-generator": "^2.0.4",
     "prom-client": "^15.1.3",
     "redis": "^4.7.0",
     "reflect-metadata": "^0.2.2",
