@@ -1,6 +1,5 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Query } from '@nestjs/common';
 import { CreateWaterLevelDto } from './dto/create-water-level.dto';
-import { UpdateWaterLevelDto } from './dto/update-water-level.dto';
 import { WaterLevelService } from './water-level.service';
 
 @Controller('water-level')
@@ -17,4 +16,8 @@ export class WaterLevelController {
     return this.waterLevelService.findAll();
   }
 
+  @Get('history')
+  findHistory(@Query('limit') limit?: string) {
+    return this.waterLevelService.findHistory(limit ? parseInt(limit) : 10);
+  }
 }
